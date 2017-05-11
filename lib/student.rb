@@ -1,3 +1,6 @@
+# require 'pry'
+# require_relative "../config/environment.rb"
+# DB = {:conn => SQLite3::Database.new("db/students.db")}
 class Student
   attr_accessor :name, :grade
   attr_reader :id
