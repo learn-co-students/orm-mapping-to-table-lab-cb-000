@@ -40,7 +40,20 @@ class Student
   end
 
   # saves an instance of the Student class to the database
+    # This is an instance method that saves the attributes describing a given student to the students table in our database
+    # Create a variable, sql, and set it equal to the SQL statement that will INSERT the correct data into the table
+    # Use bound parameters to pass the given student's name and grade into the SQL statement.
+    # Remember that you don't need to insert a value for the id column (since it's the primary key, the id column's value will be automatically assigned in the DB)
+    # At the end of the #save method, grab the ID of the last inserted row (the row you just inserted into the database), and assign it to the be the value of the @id attribute of the given instance
   def save
+    sql = <<-SQL
+      INSERT INTO students (name, grade)
+      VALUES (?, ?)
+    SQL
+
+    DB[:conn].execute(sql, self.name, self.grade)
+
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
   end
 
   # takes in a hash of attributes and uses metaprogramming to create a new student object. Then it uses the #save method to save that student to the database
