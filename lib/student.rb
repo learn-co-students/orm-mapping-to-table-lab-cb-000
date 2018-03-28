@@ -34,7 +34,7 @@ class Student
     Song.create_table
     DB[:conn].execute("INSERT INTO students (name,grade) VALUES (?,?)",@name,@grade)
 
-    @id = DB[:conn].execute("SELECT LAST_INSERT_ROWID() FROM students").flatten
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students").flatten
   end
 
   def self.create(name:, grade:)
