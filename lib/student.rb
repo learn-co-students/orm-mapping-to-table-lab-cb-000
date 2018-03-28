@@ -31,10 +31,14 @@ class Student
   end
 
   def save
-    Song.create_table
-    DB[:conn].execute("INSERT INTO students (name,grade) VALUES (?,?)",@name,@grade)
+    self.class.create_table
+    sql = <<-SQL
+      INSERT INTO students (name, grade)
+      VALUES (?, ?)
+    SQL
+    DB[:conn].execute(sql,@name,@grade)
 
-    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students").flatten
+    @id = DB[:conn].execute("SELECT LAST_INSERT_ROWID() FROM students")[0][0]
   end
 
   def self.create(name:, grade:)
