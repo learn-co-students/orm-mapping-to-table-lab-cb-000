@@ -1,0 +1,30 @@
+
+Student
+  attributes
+    has a name and a grade
+    has an id that is readable but not writable
+  .create_table
+    creates the students table in the database
+  .drop_table
+    drops the students table from the database
+  #save
+    saves an instance of the Student class to the database
+  .create
+    takes in a hash of attributes and uses metaprogramming to create a new student object. Then it uses the #save method to save that student to the database (FAILED - 1)
+
+Failures:
+
+  1) Student .create takes in a hash of attributes and uses metaprogramming to create a new student object. Then it uses the #save method to save that student to the database
+     Failure/Error: Student.create(name: "Sally", grade: "10th")
+
+     NoMethodError:
+       undefined method `create' for Student:Class
+     # ./spec/student_spec.rb:53:in `block (3 levels) in <top (required)>'
+
+Finished in 0.03508 seconds (files took 0.30557 seconds to load)
+6 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/student_spec.rb:52 # Student .create takes in a hash of attributes and uses metaprogramming to create a new student object. Then it uses the #save method to save that student to the database
+
